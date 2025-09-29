@@ -14,7 +14,7 @@ def run_psh_lsh(A_df, B_df, gt_pairs, eps_list=(0.5, 1.0, 2.0, 5.0), n_bits=256,
 
     for eps in eps_list:
         model = PrivateSimHashLinkage(n_bits=n_bits, bands=bands, eps=eps, text_col=text_col)
-        model.fit(A_df, B_df, label_subset)
+        info = model.fit(A_df, B_df, label_subset)
         preds = model.link()
         pred_pairs = {(i, j) for (i, j, _) in preds}
 
@@ -26,8 +26,17 @@ def run_psh_lsh(A_df, B_df, gt_pairs, eps_list=(0.5, 1.0, 2.0, 5.0), n_bits=256,
         recall    = tp / (tp + fn) if (tp + fn) else 0.0
         f1        = 2*precision*recall/(precision+recall) if (precision+recall) else 0.0
 
-        results.append({"eps": float(eps), "precision": precision, "recall": recall, "f1": f1})
+        results.append({
+            "eps": float(eps),
+            "precision": precision,
+            "recall": recall,
+            "f1": f1,
+            "predicted_pairs": len(preds),
+            "optimal_threshold": info["optimal_threshold"]
+        })
+
     return results
+
 
 if __name__ == "__main__":
     # Load your Alice/Bob CSVs
@@ -41,6 +50,13 @@ if __name__ == "__main__":
         for i, v in enumerate(A["id"]):
             if v in idxB:
                 gt.append((i, idxB[v]))
+
+    # Fallback: if no IDs, assume row-aligned pairs for testing
+    if not gt:
+        n = min(len(A), len(B))
+        gt = [(i, i) for i in range(n)]
+
+    print("GT pairs:", len(gt))
 
     # Run evaluation
     results = run_psh_lsh(A, B, gt, eps_list=[0.5, 1.0, 2.0, 5.0])
