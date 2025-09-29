@@ -48,8 +48,8 @@ class ComparativeEvaluator:
         if use_provided_datasets:
             try:
                 # Try to load provided datasets
-                alice_data = pd.read_csv('Alice_numrec_100_corr_25.csv')
-                bob_data = pd.read_csv('Bob_numrec_100_corr_25.csv')
+                alice_data = pd.read_csv('../csv_files/Alice_numrec_100_corr_25.csv')
+                bob_data = pd.read_csv('../csv_files/Bob_numrec_100_corr_25.csv')
                 
                 # Create ground truth based on rec_id (first column)
                 alice_ids = set(alice_data.iloc[:, 0])
