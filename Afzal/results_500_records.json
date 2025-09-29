@@ -1,0 +1,12 @@
+{
+  "dataset_size": 500,
+  "training_pairs": 400,
+  "test_pairs": 100,
+  "siamese_accuracy": 0.9,
+  "siamese_f1": 0.9074074074074074,
+  "cbf_accuracy": 0.96,
+  "cbf_f1": 0.9615384615384616,
+  "best_siamese_threshold": 0.6,
+  "best_cbf_threshold": 0.3,
+  "total_runtime": 9.456991910934448
+}
