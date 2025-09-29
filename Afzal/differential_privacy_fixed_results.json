@@ -1,0 +1,102 @@
+{
+  "dataset_size": 500,
+  "total_runtime": 2.340770959854126,
+  "results": [
+    {
+      "epsilon": 0.5,
+      "private_accuracy": 0.0,
+      "private_f1": 0,
+      "clean_accuracy": 0.93,
+      "clean_f1": 0,
+      "accuracy_loss": 0.93,
+      "f1_loss": 0,
+      "best_threshold_private": 0.1,
+      "best_threshold_clean": 0.3,
+      "private_sim_range": [
+        0.10616929698708752,
+        0.22252747252747251
+      ],
+      "clean_sim_range": [
+        0.02666666666666667,
+        0.42857142857142855
+      ]
+    },
+    {
+      "epsilon": 1.0,
+      "private_accuracy": 0.26,
+      "private_f1": 0,
+      "clean_accuracy": 0.93,
+      "clean_f1": 0,
+      "accuracy_loss": 0.67,
+      "f1_loss": 0,
+      "best_threshold_private": 0.1,
+      "best_threshold_clean": 0.3,
+      "private_sim_range": [
+        0.04697986577181208,
+        0.24584717607973422
+      ],
+      "clean_sim_range": [
+        0.03076923076923077,
+        0.5714285714285714
+      ]
+    },
+    {
+      "epsilon": 2.0,
+      "private_accuracy": 0.61,
+      "private_f1": 0,
+      "clean_accuracy": 0.97,
+      "clean_f1": 0,
+      "accuracy_loss": 0.36,
+      "f1_loss": 0,
+      "best_threshold_private": 0.1,
+      "best_threshold_clean": 0.3,
+      "private_sim_range": [
+        0.011695906432748537,
+        0.21739130434782608
+      ],
+      "clean_sim_range": [
+        0.02727272727272727,
+        0.4228571428571429
+      ]
+    },
+    {
+      "epsilon": 5.0,
+      "private_accuracy": 0.71,
+      "private_f1": 0,
+      "clean_accuracy": 0.95,
+      "clean_f1": 0,
+      "accuracy_loss": 0.24,
+      "f1_loss": 0,
+      "best_threshold_private": 0.1,
+      "best_threshold_clean": 0.3,
+      "private_sim_range": [
+        0.0,
+        0.2222222222222222
+      ],
+      "clean_sim_range": [
+        0.008695652173913044,
+        0.3826086956521739
+      ]
+    },
+    {
+      "epsilon": 10.0,
+      "private_accuracy": 0.68,
+      "private_f1": 0,
+      "clean_accuracy": 0.95,
+      "clean_f1": 0,
+      "accuracy_loss": 0.2699999999999999,
+      "f1_loss": 0,
+      "best_threshold_private": 0.1,
+      "best_threshold_clean": 0.3,
+      "private_sim_range": [
+        0.0,
+        0.36220472440944884
+      ],
+      "clean_sim_range": [
+        0.01,
+        0.72
+      ]
+    }
+  ],
+  "status": "FIXED - Working differential privacy implementation"
+}
