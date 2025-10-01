@@ -49,9 +49,11 @@ This will verify:
 
 ### 📖 Documentation
 
-- **QUICKSTART.md** - Comprehensive quick start guide
-- **NOTEBOOK_FIXES.md** - Solutions for common notebook issues
-- **README.md** - This file (general information)
+- **[SUMMARY.md](SUMMARY.md)** - Complete overview of setup solution
+- **[QUICKSTART.md](QUICKSTART.md)** - Comprehensive quick start guide  
+- **[NOTEBOOK_FIXES.md](NOTEBOOK_FIXES.md)** - Solutions for common notebook issues
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Detailed troubleshooting guide
+- **[README.md](README.md)** - This file (general information)
 
 ### Manual Setup (Advanced Users)
 
