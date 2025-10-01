@@ -52,17 +52,6 @@ clinicalbert/
 results/
 outputs/
 
-# Generated JSON results
-*_results.json
-results_*.json
-differential_privacy_*.json
-
-# Jupyter notebook outputs
-notebooks/*.png
-notebooks/*.json
-Afzal/*.png
-Afzal/*.json
-
 # IDE
 .vscode/
 .idea/
