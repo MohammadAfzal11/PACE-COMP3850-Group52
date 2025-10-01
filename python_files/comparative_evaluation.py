@@ -22,8 +22,8 @@ from federated_embedding_linkage import FederatedEmbeddingLinkage, generate_samp
 
 # Import traditional PPRL components
 try:
-    from PPRL import Link
-    from BF import BF
+    from notebooks.PPRL import Link
+    from notebooks.BF import BF
 except ImportError as e:
     print(f"Warning: Could not import traditional PPRL modules: {e}")
     print("Some comparisons may not be available.")
