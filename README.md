@@ -3,24 +3,57 @@ Cyber Security Defence Stream
 
 ## Quick Start - Environment Setup
 
-### Automated Setup (Recommended)
+### 🚀 Automated Setup (Recommended)
 
 **For Linux/Mac:**
 ```bash
 ./setup_environment.sh
+source venv/bin/activate
+python test_environment.py  # Verify installation
 ```
 
 **For Windows:**
 ```batch
 setup_environment.bat
+venv\Scripts\activate
+python test_environment.py
 ```
 
 These scripts will:
-1. Create a Python virtual environment
-2. Install all required dependencies automatically
-3. Verify the installation
+1. ✓ Create a Python virtual environment
+2. ✓ Install all required dependencies automatically
+3. ✓ Verify the installation
 
-### Manual Setup
+### 📦 What Gets Installed
+
+The following packages will be installed:
+- `numpy`, `pandas`, `scipy` - Scientific computing
+- `scikit-learn` - Machine learning utilities
+- `tensorflow` - Deep learning framework
+- `bitarray` - Bloom filter implementation
+- `matplotlib`, `seaborn` - Visualization
+- `jupyter` - Notebook support
+
+### ✅ Verify Installation
+
+After setup, run the test script:
+```bash
+python test_environment.py
+```
+
+This will verify:
+- All packages are installed correctly
+- CSV data files are accessible
+- Python modules can be imported
+- Standalone scripts have valid syntax
+
+### 📖 Documentation
+
+- **QUICKSTART.md** - Comprehensive quick start guide
+- **NOTEBOOK_FIXES.md** - Solutions for common notebook issues
+- **README.md** - This file (general information)
+
+### Manual Setup (Advanced Users)
 
 If you prefer manual setup:
 ```bash
@@ -35,17 +68,10 @@ venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Verify installation
+python verify_environment.py
 ```
-
-### Required Dependencies
-
-The following packages will be installed:
-- `numpy`, `pandas`, `scipy` - Scientific computing
-- `scikit-learn` - Machine learning utilities
-- `tensorflow` - Deep learning framework
-- `bitarray` - Bloom filter implementation
-- `matplotlib`, `seaborn` - Visualization
-- `jupyter` - Notebook support
 
 ## Repository Structure
 
