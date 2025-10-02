@@ -2,7 +2,7 @@
 import pandas as pd
 from private_simhash_linkage import PrivateSimHashLinkage
 
-def run_psh_lsh(A_df, B_df, gt_pairs, eps_list=(0.5, 1.0, 2.0, 5.0), n_bits=256, bands=32, text_col=None):
+def run_psh_lsh(A_df, B_df, gt_pairs, eps_list=(0.5, 1.0, 2.0, 5.0), n_bits=1024, bands=32, text_col=None):
     """
     Run Private SimHash + LSH with different eps values.
     Returns list of results: [{"eps": ε, "precision": p, "recall": r, "f1": f1}, ...]
