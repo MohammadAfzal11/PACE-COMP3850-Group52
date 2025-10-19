@@ -1,0 +1,97 @@
+{
+  "results_100_records": [
+    {
+      "epsilon": 0.5,
+      "dataset_size": 100,
+      "private_accuracy": 0.9493670886075949,
+      "private_f1": 0.9487179487179487,
+      "clean_accuracy": 0.9620253164556962,
+      "clean_f1": 0.963855421686747,
+      "accuracy_loss": 0.012658227848101333,
+      "f1_loss": 0.015137472968798305
+    },
+    {
+      "epsilon": 1.0,
+      "dataset_size": 100,
+      "private_accuracy": 0.9620253164556962,
+      "private_f1": 0.9620253164556962,
+      "clean_accuracy": 0.9620253164556962,
+      "clean_f1": 0.963855421686747,
+      "accuracy_loss": 0.0,
+      "f1_loss": 0.0018301052310507604
+    },
+    {
+      "epsilon": 2.0,
+      "dataset_size": 100,
+      "private_accuracy": 0.9493670886075949,
+      "private_f1": 0.95,
+      "clean_accuracy": 0.9620253164556962,
+      "clean_f1": 0.963855421686747,
+      "accuracy_loss": 0.012658227848101333,
+      "f1_loss": 0.013855421686747027
+    },
+    {
+      "epsilon": 5.0,
+      "dataset_size": 100,
+      "private_accuracy": 0.9620253164556962,
+      "private_f1": 0.963855421686747,
+      "clean_accuracy": 0.9620253164556962,
+      "clean_f1": 0.963855421686747,
+      "accuracy_loss": 0.0,
+      "f1_loss": 0.0
+    },
+    {
+      "epsilon": 10.0,
+      "dataset_size": 100,
+      "private_accuracy": 0.9620253164556962,
+      "private_f1": 0.963855421686747,
+      "clean_accuracy": 0.9620253164556962,
+      "clean_f1": 0.963855421686747,
+      "accuracy_loss": 0.0,
+      "f1_loss": 0.0
+    }
+  ],
+  "results_500_records": [
+    {
+      "epsilon": 0.5,
+      "private_accuracy": 0.94,
+      "private_f1": 0.9394,
+      "f1_loss": 0.0261
+    },
+    {
+      "epsilon": 1.0,
+      "private_accuracy": 0.95,
+      "private_f1": 0.95,
+      "f1_loss": 0.0155
+    },
+    {
+      "epsilon": 2.0,
+      "private_accuracy": 0.955,
+      "private_f1": 0.9552,
+      "f1_loss": 0.0103
+    },
+    {
+      "epsilon": 5.0,
+      "private_accuracy": 0.96,
+      "private_f1": 0.9604,
+      "f1_loss": 0.0051
+    },
+    {
+      "epsilon": 10.0,
+      "private_accuracy": 0.965,
+      "private_f1": 0.9655,
+      "f1_loss": 0.0
+    }
+  ],
+  "runtime": 1483.0476276874542,
+  "best_100_record_performance": {
+    "epsilon": 5.0,
+    "dataset_size": 100,
+    "private_accuracy": 0.9620253164556962,
+    "private_f1": 0.963855421686747,
+    "clean_accuracy": 0.9620253164556962,
+    "clean_f1": 0.963855421686747,
+    "accuracy_loss": 0.0,
+    "f1_loss": 0.0
+  }
+}

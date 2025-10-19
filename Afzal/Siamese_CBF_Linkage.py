@@ -261,7 +261,7 @@ def main():
     
     # 1. Load and preprocess data
     print("1. Loading data...")
-    alice_df, bob_df = load_and_preprocess_data('Alice_numrec_100_corr_25.csv', 'Bob_numrec_100_corr_25.csv')
+    alice_df, bob_df = load_and_preprocess_data(r"C:\Users\afzal\Documents\GitHub\PACE-COMP3850-Group52\csv_files\Alice_numrec_100_corr_25.csv", r"C:\Users\afzal\Documents\GitHub\PACE-COMP3850-Group52\csv_files\Bob_numrec_100_corr_25.csv")
     print(f"Alice records: {len(alice_df)}, Bob records: {len(bob_df)}")
     
     # 2. Initialize CBF encoder

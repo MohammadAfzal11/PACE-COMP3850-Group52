@@ -73,8 +73,8 @@ class DifferentialPrivacyCBF_100Records:
 
 def load_100_record_data():
     """Load 100-record Alice and Bob datasets"""
-    alice_df = pd.read_csv('Alice_numrec_100_corr_25.csv')
-    bob_df = pd.read_csv('Bob_numrec_100_corr_25.csv')
+    alice_df = pd.read_csv(r"C:\Users\afzal\Documents\GitHub\PACE-COMP3850-Group52\csv_files\Alice_numrec_100_corr_25.csv")
+    bob_df = pd.read_csv(r"C:\Users\afzal\Documents\GitHub\PACE-COMP3850-Group52\csv_files\Bob_numrec_100_corr_25.csv")
     
     print(f"Loaded Alice: {len(alice_df)} records, Bob: {len(bob_df)} records")
     
