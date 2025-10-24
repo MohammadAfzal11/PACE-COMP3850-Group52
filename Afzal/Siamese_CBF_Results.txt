@@ -1,0 +1,127 @@
+PS C:\Users\afzal\Documents\GitHub\PACE-COMP3850-Group52> & C:/Users/afzal/AppData/Local/Microsoft/WindowsApps/python3.11.exe c:/Users/afzal/Documents/GitHub/PACE-COMP3850-Group52/Afzal/Siamese_CBF_Linkage.py
+2025-10-19 17:48:39.849531: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-10-19 17:48:40.899151: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+=== Siamese CBF Record Linkage with target_train.csv / target_test.csv ===
+2025-10-19 17:48:44.036642: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:From C:\Users\afzal\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\backend\tensorflow\core.py:232: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+Loading training data...
+Encoding training data into CBF...
+Encoding test data into CBF...
+Training Siamese model...
+Epoch 1/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 5s 6ms/step - accuracy: 0.8143 - loss: 0.4347 - precision: 0.8311 - recall: 0.7880 - val_accuracy: 0.8299 - val_loss: 0.4212 - val_precision: 0.8025 - val_recall: 0.8742
+Epoch 2/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8421 - loss: 0.3835 - precision: 0.8476 - recall: 0.8335 - val_accuracy: 0.8115 - val_loss: 0.4214 - val_precision: 0.7662 - val_recall: 0.8955
+Epoch 3/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8429 - loss: 0.3783 - precision: 0.8479 - recall: 0.8350 - val_accuracy: 0.6938 - val_loss: 0.6764 - val_precision: 0.6238 - val_recall: 0.9734
+Epoch 4/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8377 - loss: 0.3850 - precision: 0.8454 - recall: 0.8258 - val_accuracy: 0.8321 - val_loss: 0.3724 - val_precision: 0.7662 - val_recall: 0.9549
+Epoch 5/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8356 - loss: 0.3855 - precision: 0.8445 - recall: 0.8220 - val_accuracy: 0.8289 - val_loss: 0.4033 - val_precision: 0.7672 - val_recall: 0.9434
+Epoch 6/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8372 - loss: 0.3842 - precision: 0.8419 - recall: 0.8295 - val_accuracy: 0.6889 - val_loss: 0.6270 - val_precision: 0.6192 - val_recall: 0.9777
+Epoch 7/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8305 - loss: 0.3940 - precision: 0.8311 - recall: 0.8288 - val_accuracy: 0.8644 - val_loss: 0.3370 - val_precision: 0.8383 - val_recall: 0.9023
+Epoch 8/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8381 - loss: 0.3765 - precision: 0.8376 - recall: 0.8380 - val_accuracy: 0.8614 - val_loss: 0.3524 - val_precision: 0.8796 - val_recall: 0.8367
+Epoch 9/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8440 - loss: 0.3701 - precision: 0.8415 - recall: 0.8469 - val_accuracy: 0.8580 - val_loss: 0.3436 - val_precision: 0.8268 - val_recall: 0.9051
+Epoch 10/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8447 - loss: 0.3677 - precision: 0.8425 - recall: 0.8472 - val_accuracy: 0.8650 - val_loss: 0.3536 - val_precision: 0.8933 - val_recall: 0.8284
+Epoch 11/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8478 - loss: 0.3621 - precision: 0.8459 - recall: 0.8497 - val_accuracy: 0.8160 - val_loss: 0.4005 - val_precision: 0.7408 - val_recall: 0.9709
+Epoch 12/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8494 - loss: 0.3582 - precision: 0.8462 - recall: 0.8533 - val_accuracy: 0.8528 - val_loss: 0.3626 - val_precision: 0.9100 - val_recall: 0.7823
+Epoch 13/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8323 - loss: 0.3852 - precision: 0.8263 - recall: 0.8406 - val_accuracy: 0.8615 - val_loss: 0.3485 - val_precision: 0.8190 - val_recall: 0.9274
+Epoch 14/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8305 - loss: 0.3876 - precision: 0.8223 - recall: 0.8425 - val_accuracy: 0.7800 - val_loss: 0.4464 - val_precision: 0.6996 - val_recall: 0.9800
+Epoch 15/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8367 - loss: 0.3792 - precision: 0.8272 - recall: 0.8505 - val_accuracy: 0.8204 - val_loss: 0.4031 - val_precision: 0.7491 - val_recall: 0.9624
+Epoch 16/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8395 - loss: 0.3769 - precision: 0.8340 - recall: 0.8469 - val_accuracy: 0.8506 - val_loss: 0.3494 - val_precision: 0.7956 - val_recall: 0.9429
+Epoch 17/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8381 - loss: 0.3793 - precision: 0.8310 - recall: 0.8481 - val_accuracy: 0.8525 - val_loss: 0.3563 - val_precision: 0.7966 - val_recall: 0.9459
+Epoch 18/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8377 - loss: 0.3765 - precision: 0.8319 - recall: 0.8456 - val_accuracy: 0.8597 - val_loss: 0.3518 - val_precision: 0.8473 - val_recall: 0.8770
+Epoch 19/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8390 - loss: 0.3750 - precision: 0.8373 - recall: 0.8407 - val_accuracy: 0.8546 - val_loss: 0.3568 - val_precision: 0.8005 - val_recall: 0.9439
+Epoch 20/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8409 - loss: 0.3693 - precision: 0.8376 - recall: 0.8451 - val_accuracy: 0.8655 - val_loss: 0.3466 - val_precision: 0.8381 - val_recall: 0.9053
+Epoch 21/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8419 - loss: 0.3667 - precision: 0.8379 - recall: 0.8471 - val_accuracy: 0.8579 - val_loss: 0.3478 - val_precision: 0.8050 - val_recall: 0.9439
+Epoch 22/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8407 - loss: 0.3688 - precision: 0.8363 - recall: 0.8465 - val_accuracy: 0.7630 - val_loss: 0.4613 - val_precision: 0.6835 - val_recall: 0.9780
+Epoch 23/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 6ms/step - accuracy: 0.8383 - loss: 0.3698 - precision: 0.8351 - recall: 0.8424 - val_accuracy: 0.8389 - val_loss: 0.3782 - val_precision: 0.7732 - val_recall: 0.9582
+Epoch 24/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 6ms/step - accuracy: 0.8434 - loss: 0.3664 - precision: 0.8398 - recall: 0.8480 - val_accuracy: 0.8280 - val_loss: 0.3836 - val_precision: 0.7556 - val_recall: 0.9687
+Epoch 25/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8433 - loss: 0.3661 - precision: 0.8372 - recall: 0.8517 - val_accuracy: 0.8661 - val_loss: 0.3371 - val_precision: 0.8308 - val_recall: 0.9188
+Epoch 26/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 6ms/step - accuracy: 0.8447 - loss: 0.3643 - precision: 0.8404 - recall: 0.8501 - val_accuracy: 0.8685 - val_loss: 0.3652 - val_precision: 0.8339 - val_recall: 0.9196
+Epoch 27/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8448 - loss: 0.3627 - precision: 0.8378 - recall: 0.8545 - val_accuracy: 0.8680 - val_loss: 0.3336 - val_precision: 0.8293 - val_recall: 0.9261
+Epoch 28/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8446 - loss: 0.3649 - precision: 0.8390 - recall: 0.8520 - val_accuracy: 0.7790 - val_loss: 0.4353 - val_precision: 0.6977 - val_recall: 0.9832
+Epoch 29/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 6ms/step - accuracy: 0.8469 - loss: 0.3624 - precision: 0.8426 - recall: 0.8525 - val_accuracy: 0.8386 - val_loss: 0.3762 - val_precision: 0.7711 - val_recall: 0.9622
+Epoch 30/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 6ms/step - accuracy: 0.8423 - loss: 0.3649 - precision: 0.8356 - recall: 0.8517 - val_accuracy: 0.8493 - val_loss: 0.3549 - val_precision: 0.7869 - val_recall: 0.9572
+Epoch 31/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8466 - loss: 0.3607 - precision: 0.8428 - recall: 0.8513 - val_accuracy: 0.7928 - val_loss: 0.4234 - val_precision: 0.7156 - val_recall: 0.9704
+Epoch 32/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8469 - loss: 0.3571 - precision: 0.8411 - recall: 0.8548 - val_accuracy: 0.8410 - val_loss: 0.3620 - val_precision: 0.7738 - val_recall: 0.9629
+Epoch 33/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8469 - loss: 0.3592 - precision: 0.8409 - recall: 0.8550 - val_accuracy: 0.8119 - val_loss: 0.3918 - val_precision: 0.7348 - val_recall: 0.9747
+Epoch 34/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8444 - loss: 0.3616 - precision: 0.8372 - recall: 0.8543 - val_accuracy: 0.7796 - val_loss: 0.4234 - val_precision: 0.6977 - val_recall: 0.9852
+Epoch 35/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8463 - loss: 0.3622 - precision: 0.8374 - recall: 0.8589 - val_accuracy: 0.8749 - val_loss: 0.3397 - val_precision: 0.8548 - val_recall: 0.9026
+Epoch 36/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8443 - loss: 0.3630 - precision: 0.8372 - recall: 0.8539 - val_accuracy: 0.8565 - val_loss: 0.3653 - val_precision: 0.8163 - val_recall: 0.9193
+Epoch 37/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8483 - loss: 0.3588 - precision: 0.8389 - recall: 0.8614 - val_accuracy: 0.8503 - val_loss: 0.3516 - val_precision: 0.7975 - val_recall: 0.9381
+Epoch 38/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8487 - loss: 0.3563 - precision: 0.8431 - recall: 0.8562 - val_accuracy: 0.8482 - val_loss: 0.3512 - val_precision: 0.7852 - val_recall: 0.9579
+Epoch 39/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8465 - loss: 0.3576 - precision: 0.8385 - recall: 0.8576 - val_accuracy: 0.8192 - val_loss: 0.3923 - val_precision: 0.7435 - val_recall: 0.9737
+Epoch 40/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8462 - loss: 0.3613 - precision: 0.8393 - recall: 0.8555 - val_accuracy: 0.8547 - val_loss: 0.3551 - val_precision: 0.8016 - val_recall: 0.9421
+Epoch 41/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8494 - loss: 0.3550 - precision: 0.8435 - recall: 0.8572 - val_accuracy: 0.8059 - val_loss: 0.4044 - val_precision: 0.7267 - val_recall: 0.9792
+Epoch 42/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8478 - loss: 0.3588 - precision: 0.8396 - recall: 0.8590 - val_accuracy: 0.8561 - val_loss: 0.3465 - val_precision: 0.8013 - val_recall: 0.9464
+Epoch 43/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8487 - loss: 0.3551 - precision: 0.8407 - recall: 0.8597 - val_accuracy: 0.8652 - val_loss: 0.3390 - val_precision: 0.8231 - val_recall: 0.9299
+Epoch 44/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8468 - loss: 0.3583 - precision: 0.8424 - recall: 0.8527 - val_accuracy: 0.8531 - val_loss: 0.3570 - val_precision: 0.8022 - val_recall: 0.9366
+Epoch 45/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8490 - loss: 0.3554 - precision: 0.8387 - recall: 0.8634 - val_accuracy: 0.8504 - val_loss: 0.3520 - val_precision: 0.7878 - val_recall: 0.9582
+Epoch 46/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8464 - loss: 0.3609 - precision: 0.8412 - recall: 0.8532 - val_accuracy: 0.8625 - val_loss: 0.3381 - val_precision: 0.8106 - val_recall: 0.9454
+Epoch 47/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8503 - loss: 0.3530 - precision: 0.8447 - recall: 0.8577 - val_accuracy: 0.8644 - val_loss: 0.3529 - val_precision: 0.8163 - val_recall: 0.9396
+Epoch 48/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8497 - loss: 0.3525 - precision: 0.8439 - recall: 0.8573 - val_accuracy: 0.7955 - val_loss: 0.4109 - val_precision: 0.7155 - val_recall: 0.9797
+Epoch 49/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 6ms/step - accuracy: 0.8490 - loss: 0.3548 - precision: 0.8417 - recall: 0.8590 - val_accuracy: 0.8355 - val_loss: 0.3777 - val_precision: 0.7659 - val_recall: 0.9654
+Epoch 50/50
+500/500 ━━━━━━━━━━━━━━━━━━━━ 3s 5ms/step - accuracy: 0.8503 - loss: 0.3508 - precision: 0.8477 - recall: 0.8532 - val_accuracy: 0.7861 - val_loss: 0.4327 - val_precision: 0.7058 - val_recall: 0.9800
+Evaluating model...
+250/250 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step   
+              precision    recall  f1-score   support
+
+           0       0.97      0.59      0.74      4008
+           1       0.71      0.98      0.82      3992
+
+    accuracy                           0.79      8000
+   macro avg       0.84      0.79      0.78      8000
+weighted avg       0.84      0.79      0.78      8000
+
+[[2377 1631]
+ [  80 3912]]
+WARNING:absl:You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`.
+PS C:\Users\afzal\Documents\GitHub\PACE-COMP3850-Group52> 
