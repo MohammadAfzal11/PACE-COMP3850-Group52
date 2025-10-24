@@ -64,4 +64,4 @@ outputs/
 Thumbs.db
 
 
-.csv
+*.csv
