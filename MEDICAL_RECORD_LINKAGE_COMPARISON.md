@@ -1,5 +1,36 @@
 # Medical Record Linkage: Implementation Comparison and Analysis
 
+## 🎯 Executive Summary
+
+### Quick Answers to Your Questions:
+
+**Q1: Is ash's code matching on the basis of ALL features from text1 and text2 for uid1 and uid2?**
+
+✅ **YES!** The ash implementation extracts and compares ALL medical features from both text columns:
+- **From text1 (uid1):** Extracts diagnoses, symptoms, procedures, medications, body parts, age, gender
+- **From text2 (uid2):** Extracts diagnoses, symptoms, procedures, medications, body parts, age, gender
+- **Compares:** Calculates Jaccard similarity for EACH feature category between uid1 and uid2
+- **Uses:** All 16 features (6 CBF + 3 text + 7 demographic) in Random Forest model for matching
+
+**Q2: Is it similar to Afzal's code?**
+
+⚠️ **Partially Similar, Different Approaches:**
+- **Both:** Use differential privacy, TF-IDF, work with text1/text2 pairs
+- **Different:** Ash extracts explicit medical features + ML; Afzal uses implicit patterns + threshold
+- **"CBF" means different things:**
+  - Ash: Content-Based Filtering (Jaccard similarity on extracted medical features)
+  - Afzal: Counting Bloom Filter (Dice similarity on q-gram encodings)
+
+**Q3: What about the README with code snippets?**
+
+✅ **Complete!** This document provides:
+- Detailed code snippets for every major function
+- Explanation of what each code block does
+- Real results from both implementations
+- Usage examples and instructions
+
+---
+
 ## Overview
 This document provides a comprehensive comparison between two privacy-preserving medical record linkage implementations in this repository, along with detailed code snippets and results explanation.
 
