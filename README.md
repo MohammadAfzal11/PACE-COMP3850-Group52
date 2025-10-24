@@ -80,6 +80,24 @@ Contains medical record linkage with Content-Based Filtering:
 - Privacy-utility tradeoff evaluation
 - Comprehensive comparison framework
 
+## 📚 Detailed Implementation Comparison
+
+**NEW:** For a comprehensive comparison between Ash's Random Forest + Content-Based Filtering implementation and Afzal's DP-CBF + TF-IDF Fusion implementation, including detailed code snippets, explanations, and results, see:
+
+👉 **[MEDICAL_RECORD_LINKAGE_COMPARISON.md](MEDICAL_RECORD_LINKAGE_COMPARISON.md)**
+
+This document answers the question: **"Is the code matching on the basis of all features from text1 and text2 for uid1 and uid2?"**
+
+**Answer: YES!** The ash implementation extracts and compares:
+- All diagnoses from text1 (uid1) and text2 (uid2)
+- All symptoms from text1 (uid1) and text2 (uid2)
+- All procedures from text1 (uid1) and text2 (uid2)
+- All medications from text1 (uid1) and text2 (uid2)
+- All body parts from text1 (uid1) and text2 (uid2)
+- Plus demographics (age, gender) and text similarity features
+
+Total: **16 features** used for matching, including 6 Content-Based Filtering features.
+
 ## Usage
 
 ### Running Notebooks
@@ -122,3 +140,24 @@ Expected outputs include:
 - Final evaluation reports
 
 The reorganized structure maintains all original functionality while providing better organization and the new interactive notebook interface for the federated embedding linkage system.
+
+---
+
+## Quick Reference: Implementation Comparison
+
+### Ash's Implementation vs Afzal's Implementation
+
+| Feature | Ash (Random Forest + CBF) | Afzal (DP-CBF + TF-IDF) |
+|---------|---------------------------|-------------------------|
+| **File** | `ash/working code with random forest and DP.ipynb` | `Afzal/Differential_Privacy_CBF_TF-IDF_Linkage(new).py` |
+| **Matching Method** | Machine Learning (Random Forest) | Threshold-based on fused similarities |
+| **Feature Extraction** | Explicit medical features (diagnoses, symptoms, procedures, etc.) | Implicit via q-grams in Bloom Filters |
+| **Number of Features** | 16 features | 2 similarity scores (fused) |
+| **Interpretability** | High (feature importance) | Medium (similarity scores) |
+| **Privacy Mechanism** | Laplace noise on features | Laplace noise on CBF and scores |
+| **Best Use Case** | When medical context matters | When speed and privacy are priority |
+| **CBF Meaning** | Content-Based Filtering (Jaccard similarity on medical features) | Counting Bloom Filter (Dice similarity on q-grams) |
+
+**Key Finding:** Both implementations work with text1/text2 for uid1/uid2, but Ash's explicitly extracts and compares ALL medical features, while Afzal's uses implicit text patterns.
+
+For detailed analysis with code snippets and results, see [MEDICAL_RECORD_LINKAGE_COMPARISON.md](MEDICAL_RECORD_LINKAGE_COMPARISON.md).

@@ -750,6 +750,29 @@ While both implementations address the same problem (privacy-preserving medical 
 
 ## Usage Examples
 
+### Important Note about Data Files
+
+Both implementations expect `target_train.csv` and `target_test.csv` files, which are not included in this repository. These files should have the following format:
+
+```csv
+uid1,text1,uid2,text2,label
+rec_001,"[[45.0, 'year']] M Patient with diabetes...",rec_147,"45-year-old male with diabetes...",1
+rec_002,"[[57.0, 'year']] M Patient with thyroid...",rec_298,"22-year-old male with renal...",0
+...
+```
+
+Where:
+- `uid1`: Unique identifier for first record
+- `text1`: Medical text for first record
+- `uid2`: Unique identifier for second record
+- `text2`: Medical text for second record
+- `label`: 1 if records match (same patient), 0 if non-match
+
+**To run the implementations, you need to:**
+1. Prepare your data in the format above
+2. Save as `csv_files/target_train.csv` and `csv_files/target_test.csv`
+3. Update file paths in the code if needed
+
 ### Running Ash's Implementation
 
 ```bash
