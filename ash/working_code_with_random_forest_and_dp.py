@@ -37,26 +37,192 @@ def load_data(file_path):
 # Load training data
 train_data = load_data(file_path='/content/target_train.csv')
 
-# Extract demographic information using regex
-def extract_demographics(text):
-    # Extract age and gender if available
-    age_pattern = r'\[\[(\d+\.\d+|\d+), \'year\'\]\] ([MF])'
-    match = re.search(age_pattern, text)
-    if match:
-        age = float(match.group(1))
-        gender = match.group(2)
-        return {'age': age, 'gender': gender}
-    return {'age': None, 'gender': None}
+# Enhanced medical information extraction function
+def extract_medical_information(text):
+    """
+    Extract comprehensive medical information from unstructured medical text
+    This includes demographics, diagnoses, symptoms, procedures, medications, and clinical findings
+    """
+    if pd.isna(text) or not text:
+        return {
+            'age': None, 'gender': None, 
+            'diagnoses': [], 'symptoms': [], 
+            'procedures': [], 'medications': [],
+            'test_results': [], 'body_parts': []
+        }
+    
+    text_lower = text.lower()
+    extracted_info = {
+        'age': None,
+        'gender': None,
+        'diagnoses': [],
+        'symptoms': [],
+        'procedures': [],
+        'medications': [],
+        'test_results': [],
+        'body_parts': []
+    }
+    
+    # Extract age and gender (multiple patterns)
+    age_patterns = [
+        r'\[\[(\d+\.\d+|\d+),\s*\'year\'\]\]\s*([MF])',
+        r'(\d+)[-\s]year[-\s]old\s+(male|female|man|woman|boy|girl)',
+        r'(male|female|man|woman),?\s*age\s*(\d+)',
+        r'(\d+)[-\s]*y/?o\s+(male|female|man|woman|m|f)'
+    ]
+    
+    for pattern in age_patterns:
+        match = re.search(pattern, text_lower)
+        if match:
+            try:
+                if pattern == age_patterns[0]:  # [[X, 'year']] M pattern
+                    extracted_info['age'] = float(match.group(1))
+                    extracted_info['gender'] = match.group(2)
+                elif pattern == age_patterns[1]:  # X-year-old male pattern
+                    extracted_info['age'] = float(match.group(1))
+                    gender_word = match.group(2)
+                    extracted_info['gender'] = 'M' if gender_word in ['male', 'man', 'boy'] else 'F'
+                elif pattern == age_patterns[2]:  # male, age X pattern
+                    extracted_info['age'] = float(match.group(2))
+                    gender_word = match.group(1)
+                    extracted_info['gender'] = 'M' if gender_word in ['male', 'man'] else 'F'
+                elif pattern == age_patterns[3]:  # X y/o male pattern
+                    extracted_info['age'] = float(match.group(1))
+                    gender_word = match.group(2)
+                    extracted_info['gender'] = 'M' if gender_word in ['male', 'man', 'm'] else 'F'
+                break
+            except:
+                pass
+    
+    # Extract common diagnoses and medical conditions
+    diagnosis_keywords = [
+        'diabetes', 'hypertension', 'cancer', 'carcinoma', 'tumor', 'malignancy',
+        'heart disease', 'coronary', 'myocardial', 'stroke', 'asthma', 'copd',
+        'pneumonia', 'infection', 'sepsis', 'fracture', 'injury', 'trauma',
+        'depression', 'anxiety', 'schizophrenia', 'bipolar', 'dementia',
+        'arthritis', 'osteoarthritis', 'rheumatoid', 'lupus', 'autoimmune',
+        'kidney disease', 'renal failure', 'liver disease', 'hepatitis',
+        'thyroid', 'hypothyroidism', 'hyperthyroidism', 'epilepsy', 'seizure',
+        'neuropathy', 'polyneuropathy', 'parkinson', 'alzheimer', 'multiple sclerosis',
+        'amyloidosis', 'sarcoidosis', 'fibrosis', 'cirrhosis', 'anemia',
+        'leukemia', 'lymphoma', 'myeloma', 'thrombosis', 'embolism',
+        'aneurysm', 'stenosis', 'ischemia', 'infarction', 'necrosis'
+    ]
+    
+    for diagnosis in diagnosis_keywords:
+        if diagnosis in text_lower:
+            extracted_info['diagnoses'].append(diagnosis)
+    
+    # Extract symptoms and clinical presentations
+    symptom_keywords = [
+        'pain', 'fever', 'fatigue', 'weakness', 'dizziness', 'nausea', 'vomiting',
+        'headache', 'cough', 'dyspnoea', 'dyspnea', 'shortness of breath', 'chest pain',
+        'abdominal pain', 'back pain', 'swelling', 'edema', 'rash', 'bleeding',
+        'numbness', 'tingling', 'paralysis', 'confusion', 'loss of consciousness',
+        'syncope', 'palpitations', 'tachycardia', 'bradycardia', 'hypotension',
+        'hypertension', 'vision loss', 'hearing loss', 'tinnitus', 'vertigo',
+        'weight loss', 'weight gain', 'anorexia', 'cachexia', 'night sweats',
+        'chills', 'malaise', 'lethargy', 'tremor', 'rigidity', 'spasticity'
+    ]
+    
+    for symptom in symptom_keywords:
+        if symptom in text_lower:
+            extracted_info['symptoms'].append(symptom)
+    
+    # Extract procedures and interventions
+    procedure_keywords = [
+        'surgery', 'operation', 'biopsy', 'excision', 'resection', 'amputation',
+        'transplant', 'angioplasty', 'catheterization', 'stent', 'bypass',
+        'mastectomy', 'hysterectomy', 'appendectomy', 'cholecystectomy',
+        'laparoscopy', 'endoscopy', 'colonoscopy', 'bronchoscopy',
+        'mri', 'ct scan', 'x-ray', 'ultrasound', 'echocardiogram', 'ekg', 'ecg',
+        'dialysis', 'chemotherapy', 'radiation', 'radiotherapy',
+        'intubation', 'ventilation', 'tracheostomy', 'drainage', 'aspiration',
+        'injection', 'infusion', 'transfusion', 'replacement', 'repair'
+    ]
+    
+    for procedure in procedure_keywords:
+        if procedure in text_lower:
+            extracted_info['procedures'].append(procedure)
+    
+    # Extract medications and drug classes
+    medication_keywords = [
+        'insulin', 'metformin', 'aspirin', 'warfarin', 'heparin', 'statin',
+        'beta blocker', 'ace inhibitor', 'arb', 'diuretic', 'antibiotic',
+        'penicillin', 'cephalosporin', 'fluoroquinolone', 'vancomycin',
+        'steroid', 'prednisone', 'dexamethasone', 'nsaid', 'ibuprofen',
+        'morphine', 'opioid', 'analgesic', 'antipyretic', 'anticoagulant',
+        'thrombolytic', 'antihypertensive', 'antiarrhythmic', 'vasopressor',
+        'immunosuppressant', 'chemotherapy', 'antidepressant', 'antipsychotic',
+        'clozapine', 'lithium', 'risperidone', 'olanzapine', 'aripiprazole'
+    ]
+    
+    for medication in medication_keywords:
+        if medication in text_lower:
+            extracted_info['medications'].append(medication)
+    
+    # Extract lab values and test results
+    test_patterns = [
+        r'(hemoglobin|hb|haemoglobin)\s*[:=]?\s*(\d+\.?\d*)',
+        r'(creatinine)\s*[:=]?\s*(\d+\.?\d*)',
+        r'(glucose|blood sugar)\s*[:=]?\s*(\d+\.?\d*)',
+        r'(platelet|plt)\s*[:=]?\s*(\d+\.?\d*)',
+        r'(wbc|white blood cell)\s*[:=]?\s*(\d+\.?\d*)',
+        r'(ejection fraction|ef)\s*[:=]?\s*(\d+\.?\d*)',
+        r'(blood pressure|bp)\s*[:=]?\s*(\d+/\d+)'
+    ]
+    
+    for pattern in test_patterns:
+        matches = re.finditer(pattern, text_lower)
+        for match in matches:
+            test_name = match.group(1)
+            test_value = match.group(2)
+            extracted_info['test_results'].append(f"{test_name}:{test_value}")
+    
+    # Extract body parts and anatomical locations
+    body_part_keywords = [
+        'heart', 'lung', 'liver', 'kidney', 'brain', 'spleen', 'pancreas',
+        'stomach', 'intestine', 'colon', 'bladder', 'prostate', 'uterus', 'ovary',
+        'breast', 'thyroid', 'bone', 'joint', 'muscle', 'skin', 'eye', 'ear',
+        'hip', 'knee', 'shoulder', 'spine', 'vertebra', 'disc', 'nerve',
+        'artery', 'vein', 'vessel', 'aorta', 'ventricle', 'atrium', 'valve'
+    ]
+    
+    for body_part in body_part_keywords:
+        if body_part in text_lower:
+            extracted_info['body_parts'].append(body_part)
+    
+    return extracted_info
 
-# Apply extraction to both text columns
-train_data['demographics1'] = train_data['text1'].apply(extract_demographics)
-train_data['demographics2'] = train_data['text2'].apply(extract_demographics)
+# Apply enhanced extraction to both text columns
+print("Extracting comprehensive medical information...")
+train_data['medical_info1'] = train_data['text1'].apply(extract_medical_information)
+train_data['medical_info2'] = train_data['text2'].apply(extract_medical_information)
 
-# Extract structured data from the demographics
-train_data['age1'] = train_data['demographics1'].apply(lambda x: x.get('age'))
-train_data['gender1'] = train_data['demographics1'].apply(lambda x: x.get('gender'))
-train_data['age2'] = train_data['demographics2'].apply(lambda x: x.get('age'))
-train_data['gender2'] = train_data['demographics2'].apply(lambda x: x.get('gender'))
+# Extract structured data from the medical information
+train_data['age1'] = train_data['medical_info1'].apply(lambda x: x.get('age'))
+train_data['gender1'] = train_data['medical_info1'].apply(lambda x: x.get('gender'))
+train_data['age2'] = train_data['medical_info2'].apply(lambda x: x.get('age'))
+train_data['gender2'] = train_data['medical_info2'].apply(lambda x: x.get('gender'))
+
+# Extract lists of medical features
+train_data['diagnoses1'] = train_data['medical_info1'].apply(lambda x: x.get('diagnoses', []))
+train_data['diagnoses2'] = train_data['medical_info2'].apply(lambda x: x.get('diagnoses', []))
+train_data['symptoms1'] = train_data['medical_info1'].apply(lambda x: x.get('symptoms', []))
+train_data['symptoms2'] = train_data['medical_info2'].apply(lambda x: x.get('symptoms', []))
+train_data['procedures1'] = train_data['medical_info1'].apply(lambda x: x.get('procedures', []))
+train_data['procedures2'] = train_data['medical_info2'].apply(lambda x: x.get('procedures', []))
+train_data['medications1'] = train_data['medical_info1'].apply(lambda x: x.get('medications', []))
+train_data['medications2'] = train_data['medical_info2'].apply(lambda x: x.get('medications', []))
+train_data['test_results1'] = train_data['medical_info1'].apply(lambda x: x.get('test_results', []))
+train_data['test_results2'] = train_data['medical_info2'].apply(lambda x: x.get('test_results', []))
+train_data['body_parts1'] = train_data['medical_info1'].apply(lambda x: x.get('body_parts', []))
+train_data['body_parts2'] = train_data['medical_info2'].apply(lambda x: x.get('body_parts', []))
+
+print(f"Extracted features - Sample from first record:")
+print(f"  Diagnoses: {train_data['diagnoses1'].iloc[0][:3] if len(train_data['diagnoses1'].iloc[0]) > 0 else 'None'}")
+print(f"  Symptoms: {train_data['symptoms1'].iloc[0][:3] if len(train_data['symptoms1'].iloc[0]) > 0 else 'None'}")
+print(f"  Procedures: {train_data['procedures1'].iloc[0][:3] if len(train_data['procedures1'].iloc[0]) > 0 else 'None'}")
 
 import nltk
 nltk.download('punkt')
@@ -161,30 +327,69 @@ train_data['hashed_jaccard'] = train_data.apply(
     axis=1
 )
 
-# Extract demographic information using regex
-def extract_demographics(text):
-    # Extract age and gender if available
-    age_pattern = r'(\d+)[-\s]year[-\s]old\s+(male|female|man|woman|lady|boy|girl)'
-    match = re.search(age_pattern, text.lower())
-    if match:
-        try:
-            age = float(match.group(1))
-            gender = 'M' if match.group(2) in ['male', 'man', 'boy'] else 'F'
-            return {'age': age, 'gender': gender}
-        except:
-            pass
-    return {'age': None, 'gender': None}
+# Content-Based Filtering: Calculate overlap/similarity for medical features
+def calculate_medical_feature_similarity(list1, list2):
+    """
+    Calculate Jaccard similarity between two lists of medical features
+    Used for Content-Based Filtering approach
+    """
+    if not list1 or not list2:
+        return 0.0
+    
+    set1 = set(list1)
+    set2 = set(list2)
+    
+    if len(set1) == 0 and len(set2) == 0:
+        return 0.0
+    
+    intersection = len(set1.intersection(set2))
+    union = len(set1.union(set2))
+    
+    return intersection / union if union > 0 else 0.0
 
-# Apply extraction to both text columns
-print("Extracting demographics...")
-train_data['demographics1'] = train_data['text1'].apply(extract_demographics)
-train_data['demographics2'] = train_data['text2'].apply(extract_demographics)
+# Content-Based Filtering: Calculate similarities for each medical feature category
+print("Calculating Content-Based Filtering similarities...")
+train_data['cbf_diagnoses_sim'] = train_data.apply(
+    lambda row: calculate_medical_feature_similarity(row['diagnoses1'], row['diagnoses2']),
+    axis=1
+)
 
-# Extract structured data from the demographics
-train_data['age1'] = train_data['demographics1'].apply(lambda x: x.get('age'))
-train_data['gender1'] = train_data['demographics1'].apply(lambda x: x.get('gender'))
-train_data['age2'] = train_data['demographics2'].apply(lambda x: x.get('age'))
-train_data['gender2'] = train_data['demographics2'].apply(lambda x: x.get('gender'))
+train_data['cbf_symptoms_sim'] = train_data.apply(
+    lambda row: calculate_medical_feature_similarity(row['symptoms1'], row['symptoms2']),
+    axis=1
+)
+
+train_data['cbf_procedures_sim'] = train_data.apply(
+    lambda row: calculate_medical_feature_similarity(row['procedures1'], row['procedures2']),
+    axis=1
+)
+
+train_data['cbf_medications_sim'] = train_data.apply(
+    lambda row: calculate_medical_feature_similarity(row['medications1'], row['medications2']),
+    axis=1
+)
+
+train_data['cbf_body_parts_sim'] = train_data.apply(
+    lambda row: calculate_medical_feature_similarity(row['body_parts1'], row['body_parts2']),
+    axis=1
+)
+
+# Overall CBF similarity score (weighted average)
+train_data['cbf_overall_similarity'] = (
+    0.3 * train_data['cbf_diagnoses_sim'] +
+    0.2 * train_data['cbf_symptoms_sim'] +
+    0.2 * train_data['cbf_procedures_sim'] +
+    0.15 * train_data['cbf_medications_sim'] +
+    0.15 * train_data['cbf_body_parts_sim']
+)
+
+print(f"\nContent-Based Filtering Similarity Statistics:")
+print(f"  Diagnoses similarity: Mean = {train_data['cbf_diagnoses_sim'].mean():.4f}")
+print(f"  Symptoms similarity: Mean = {train_data['cbf_symptoms_sim'].mean():.4f}")
+print(f"  Procedures similarity: Mean = {train_data['cbf_procedures_sim'].mean():.4f}")
+print(f"  Medications similarity: Mean = {train_data['cbf_medications_sim'].mean():.4f}")
+print(f"  Body parts similarity: Mean = {train_data['cbf_body_parts_sim'].mean():.4f}")
+print(f"  Overall CBF similarity: Mean = {train_data['cbf_overall_similarity'].mean():.4f}")
 
 # Create TF-IDF vectors
 print("Creating TF-IDF vectors...")
@@ -321,12 +526,20 @@ axes[1].set_title('Improved Threshold Model')
 plt.tight_layout()
 plt.show()
 
-# Prepare features for ML model
+# Prepare features for ML model with Content-Based Filtering features
 def prepare_features(df):
     features = pd.DataFrame()
     features['tfidf_cosine'] = df['tfidf_cosine']
     features['hashed_jaccard'] = df['hashed_jaccard']
     features['length_diff_pct'] = df['length_diff_pct']
+    
+    # Content-Based Filtering features
+    features['cbf_diagnoses_sim'] = df['cbf_diagnoses_sim']
+    features['cbf_symptoms_sim'] = df['cbf_symptoms_sim']
+    features['cbf_procedures_sim'] = df['cbf_procedures_sim']
+    features['cbf_medications_sim'] = df['cbf_medications_sim']
+    features['cbf_body_parts_sim'] = df['cbf_body_parts_sim']
+    features['cbf_overall_similarity'] = df['cbf_overall_similarity']
 
     # Handle age difference - replace NaN with median
     age_diff = df['age_diff'].copy()
@@ -405,9 +618,9 @@ for col in X.columns[:3]:  # Show just a few columns for brevity
 
 
 
-# Function to process new data (test data)
+# Function to process new data (test data) with Content-Based Filtering
 def process_new_data(new_data, vectorizer, rf_model):
-    """Process new data for prediction using the trained model"""
+    """Process new data for prediction using the trained model with CBF"""
     # Apply preprocessing
     new_data['processed_text1'] = new_data['text1'].apply(lambda x: preprocess_text_robust(x))
     new_data['processed_text2'] = new_data['text2'].apply(lambda x: preprocess_text_robust(x))
@@ -422,16 +635,58 @@ def process_new_data(new_data, vectorizer, rf_model):
         axis=1
     )
 
+    # Extract comprehensive medical information
+    new_data['medical_info1'] = new_data['text1'].apply(extract_medical_information)
+    new_data['medical_info2'] = new_data['text2'].apply(extract_medical_information)
+
     # Extract demographics
-    new_data['demographics1'] = new_data['text1'].apply(extract_demographics)
-    new_data['demographics2'] = new_data['text2'].apply(extract_demographics)
+    new_data['age1'] = new_data['medical_info1'].apply(lambda x: x.get('age'))
+    new_data['gender1'] = new_data['medical_info1'].apply(lambda x: x.get('gender'))
+    new_data['age2'] = new_data['medical_info2'].apply(lambda x: x.get('age'))
+    new_data['gender2'] = new_data['medical_info2'].apply(lambda x: x.get('gender'))
+    
+    # Extract medical features for CBF
+    new_data['diagnoses1'] = new_data['medical_info1'].apply(lambda x: x.get('diagnoses', []))
+    new_data['diagnoses2'] = new_data['medical_info2'].apply(lambda x: x.get('diagnoses', []))
+    new_data['symptoms1'] = new_data['medical_info1'].apply(lambda x: x.get('symptoms', []))
+    new_data['symptoms2'] = new_data['medical_info2'].apply(lambda x: x.get('symptoms', []))
+    new_data['procedures1'] = new_data['medical_info1'].apply(lambda x: x.get('procedures', []))
+    new_data['procedures2'] = new_data['medical_info2'].apply(lambda x: x.get('procedures', []))
+    new_data['medications1'] = new_data['medical_info1'].apply(lambda x: x.get('medications', []))
+    new_data['medications2'] = new_data['medical_info2'].apply(lambda x: x.get('medications', []))
+    new_data['body_parts1'] = new_data['medical_info1'].apply(lambda x: x.get('body_parts', []))
+    new_data['body_parts2'] = new_data['medical_info2'].apply(lambda x: x.get('body_parts', []))
+    
+    # Calculate CBF similarities
+    new_data['cbf_diagnoses_sim'] = new_data.apply(
+        lambda row: calculate_medical_feature_similarity(row['diagnoses1'], row['diagnoses2']),
+        axis=1
+    )
+    new_data['cbf_symptoms_sim'] = new_data.apply(
+        lambda row: calculate_medical_feature_similarity(row['symptoms1'], row['symptoms2']),
+        axis=1
+    )
+    new_data['cbf_procedures_sim'] = new_data.apply(
+        lambda row: calculate_medical_feature_similarity(row['procedures1'], row['procedures2']),
+        axis=1
+    )
+    new_data['cbf_medications_sim'] = new_data.apply(
+        lambda row: calculate_medical_feature_similarity(row['medications1'], row['medications2']),
+        axis=1
+    )
+    new_data['cbf_body_parts_sim'] = new_data.apply(
+        lambda row: calculate_medical_feature_similarity(row['body_parts1'], row['body_parts2']),
+        axis=1
+    )
+    new_data['cbf_overall_similarity'] = (
+        0.3 * new_data['cbf_diagnoses_sim'] +
+        0.2 * new_data['cbf_symptoms_sim'] +
+        0.2 * new_data['cbf_procedures_sim'] +
+        0.15 * new_data['cbf_medications_sim'] +
+        0.15 * new_data['cbf_body_parts_sim']
+    )
 
-    new_data['age1'] = new_data['demographics1'].apply(lambda x: x.get('age'))
-    new_data['gender1'] = new_data['demographics1'].apply(lambda x: x.get('gender'))
-    new_data['age2'] = new_data['demographics2'].apply(lambda x: x.get('age'))
-    new_data['gender2'] = new_data['demographics2'].apply(lambda x: x.get('gender'))
-
-    # Calculate cosine similarity
+    # Calculate cosine similarity using TF-IDF
     tfidf1 = vectorizer.transform(new_data['processed_text1'])
     tfidf2 = vectorizer.transform(new_data['processed_text2'])
 
@@ -592,10 +847,13 @@ model_artifacts = {
     'vectorizer': vectorizer,
     'feature_names': X.columns.tolist(),
     'metadata': {
-        'created_date': '2025-10-21 15:21:02',  # Current timestamp
-        'created_by': 'ashuthecoderin',  # Current username
+        'created_date': '2025-10-21 15:21:02',  # Original timestamp
+        'updated_date': '2025-10-24',  # CBF update
+        'created_by': 'ashuthecoderin',
         'accuracy': 0.98,
-        'privacy_methods': ['text_anonymization', 'hashed_ngrams', 'tfidf_vectors']
+        'privacy_methods': ['text_anonymization', 'hashed_ngrams', 'tfidf_vectors', 'differential_privacy'],
+        'feature_extraction': 'comprehensive_medical_info_with_cbf',
+        'cbf_features': ['diagnoses', 'symptoms', 'procedures', 'medications', 'body_parts']
     }
 }
 
@@ -631,21 +889,35 @@ print(results[['uid1', 'uid2', 'predicted_match', 'match_probability']])
 # Summary and conclusions
 print("\n=== Summary and Conclusions ===")
 print(f"""
-The privacy-preserving medical record linkage model achieved:
-- 98% overall accuracy on test data
-- 98% precision and 97% recall for identifying matches
-- 97% precision and 98% recall for identifying non-matches
+The privacy-preserving medical record linkage model with Content-Based Filtering achieved:
+- High accuracy on test data (check classification report above)
+- Precision and recall for identifying matches and non-matches
+
+Content-Based Filtering (CBF) Features:
+1. Diagnosis similarity: Matches common diagnoses between medical records
+2. Symptom similarity: Compares clinical presentations and symptoms
+3. Procedure similarity: Identifies shared medical procedures and interventions
+4. Medication similarity: Matches prescribed medications and drug classes
+5. Body part similarity: Compares affected anatomical locations
 
 Privacy-preserving techniques used:
-1. Text anonymization via regex patterns
+1. Text anonymization via regex patterns (removes dates, names, identifiers)
 2. Hashed n-grams with salt for text similarity
 3. TF-IDF vectorization (inherently privacy-preserving)
+4. Differential privacy with Laplace noise
 
-The Random Forest model significantly outperformed the threshold-based approach,
-demonstrating the value of machine learning for this task.
+The Random Forest model with CBF features significantly outperforms the threshold-based approach,
+demonstrating the value of comprehensive medical feature extraction for record linkage.
+
+Enhanced from previous version by:
+- Extracting comprehensive medical information (not just age/gender demographics)
+- Implementing Content-Based Filtering with medical feature similarities
+- Parsing entire medical text to extract diagnoses, symptoms, procedures, medications, etc.
+- Maintaining differential privacy and model comparison capabilities
 
 Created by: ashuthecoderin
 Date: 2025-10-21 15:21:02
+Updated: 2025-10-24 (CBF implementation)
 """)
 
 print("\nImplementation complete! 🎉")
@@ -774,10 +1046,10 @@ plt.show()
 # Apply differential privacy to test data
 print("\nApplying differential privacy to test data predictions...")
 
-# Create a new function for private prediction
+# Create a new function for private prediction with CBF
 def predict_with_privacy(test_data, vectorizer, model, epsilon=1.0):
     """
-    Process and predict on test data with differential privacy
+    Process and predict on test data with differential privacy and CBF
     """
     # Process the data
     processed_data = process_new_data(test_data, vectorizer, model)
