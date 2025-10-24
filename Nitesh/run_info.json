@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-10-24T16:26:51.754737Z",
+  "python": "3.12.4",
+  "platform": "macOS-15.3.2-arm64-arm-64bit",
+  "random_state": 42,
+  "config": {
+    "model": "lr",
+    "n_features": 65536,
+    "no_char": true,
+    "use_bf": true,
+    "dp_bf_scale": 0.0,
+    "dp_text_scale": 0.0,
+    "val_size": 0.15,
+    "multi_cat": null
+  },
+  "metrics_snapshot": {
+    "roc_auc": 0.9962390474561897,
+    "pr_auc": 0.9970872461240057,
+    "threshold_from_validation": 0.37296947939352415,
+    "accuracy": 0.97675,
+    "precision": 0.981284774911482,
+    "recall": 0.9719438877755511,
+    "f1": 0.9765919959728165,
+    "tn": 3934,
+    "fp": 74,
+    "fn": 112,
+    "tp": 3880
+  }
+}
